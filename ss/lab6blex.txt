@@ -1,0 +1,11 @@
+%{
+ #include<stdio.h>
+ #include "y.tab.h"
+ extern int yyval;
+%}
+%%
+(if|or|for|int|string|float|class|double|while|do|char|else|break|continue|printf) {printf("KEYWORD is:%s\n",yytext); return KEY;}
+^[_a-zA-Z](a-zA-Z0-9)* {printf("IDENTIFIER is: %s\n",yytext); return ID;}
+[+|-|*|/|=] { printf("OPERATOR is: %s\n",yytext); return OP;}
+. ;
+%%

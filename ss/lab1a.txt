@@ -1,0 +1,27 @@
+%{
+ #include<stdio.h>
+ #include<string.h>
+ int op=0, id=0, b=0;
+%}
+%%
+[0-9]+ {id++;}
+[+|*] {op++;}
+"(" {b++;}
+")" {b--;}
+%%
+int yywrap() {}
+int main()
+{
+ printf("Enter an expression:\n");
+ yylex();
+ if(op==0 && id>1)
+	printf("INVALID EXPRESSION!\n");
+ if(b==0 && id==op+1 && op>0){
+	printf("VALID EXPRESSION!\n");
+	printf("The number of operators entered are:%d \n",op);
+	printf("The number of identifiers entered are:%d \n",id);
+ }
+ else
+	printf("INVALID EXPRESSION!\n");
+ return 0;
+}

@@ -1,0 +1,17 @@
+%{
+ #include<stdio.h>
+ int yyerror();
+ int yylex();
+%}
+%token A B ENTER
+%%
+ start: S ENTER {printf("\nValid String!"); exit(0);}
+ S: A S|B
+%%
+void main(){
+ printf("\nEnter the string: ");
+ yyparse();
+}
+int yyerror(){
+ printf("\nInvalid statement!");
+}
